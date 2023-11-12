@@ -1,23 +1,23 @@
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.Objects;
 
-public class CIBProvider implements BankProvider{
+public class NationalBankOfEgyptProvider implements BankProvider{
     private ArrayList<Map<String, String>> vector = new ArrayList<>();
-    public CIBProvider(){
+    public NationalBankOfEgyptProvider(){
         seed();
     }
     public float getBalanceByCardNum(String cn){
         for (Map<String, String> map : vector){
-            if(map.get("cardNum") == cn){
-                return Float.parseFloat(map.get("cardNum"));
+            if(Objects.equals(map.get("cardNum"), cn)){
+                return Float.parseFloat(map.get("balance"));
             }
         }
         return 0;
     }
     public boolean matchData(String card, String phone){
         for (Map<String, String> map : vector){
-            if(map.get("cardNum") == card && map.get("phoneNum") == phone){
+            if(Objects.equals(map.get("cardNum"), card) && map.get("phoneNum") == phone){
                 return true;
             }
         }
@@ -25,8 +25,8 @@ public class CIBProvider implements BankProvider{
     }
     public void withdrawing(String cn, float amount){
         for (Map<String, String> map : vector){
-            if(map.get("cardNum") == cn){
-                float balance = Float.parseFloat(map.get("cardNum"));
+            if(Objects.equals(map.get("cardNum"), cn)){
+                float balance = Float.parseFloat(map.get("balance"));
                 balance -= amount;
                 map.put("balance", Float.toString(balance));
             }
@@ -34,8 +34,8 @@ public class CIBProvider implements BankProvider{
     }
     public void deposit(String cn, float amount){
         for (Map<String, String> map : vector){
-            if(map.get("cardNum") == cn){
-                float balance = Float.parseFloat(map.get("cardNum"));
+            if(Objects.equals(map.get("cardNum"), cn)){
+                float balance = Float.parseFloat(map.get("balance"));
                 balance += amount;
                 map.put("balance", Float.toString(balance));
             }
