@@ -1,8 +1,10 @@
+package paymentProviders;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Objects;
 
-public class VodafoneProvider{
+public class VodafoneProvider implements WalletProvider{
     private ArrayList<Map<String, String>> vector = new ArrayList<>();
     public VodafoneProvider(){
         seed();

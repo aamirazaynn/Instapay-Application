@@ -28,5 +28,13 @@ public abstract class SignUp {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getProviderName() {
+        return providerName;
+    }
+
+    public void setProviderName(String providerName) {
+        this.providerName = providerName;
+    }
+
     public abstract void register(LocalStorage localStorage, String providerName);
 }

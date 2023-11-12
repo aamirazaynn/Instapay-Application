@@ -13,6 +13,8 @@ public class LocalStorage implements ApplicationData {
         Map<String, String> userInfo = new HashMap<>();
         userInfo.put("username", user.getUserInfo().getUsername());
         userInfo.put("password", user.getUserInfo().getPassword());
+        userInfo.put("provider", user.getProvider().toString());
+        userInfo.put("phoneNumber", user.getPhoneNumber());
         users.add(userInfo);
     }
 
