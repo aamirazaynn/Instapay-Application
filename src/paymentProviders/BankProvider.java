@@ -5,4 +5,5 @@ public interface BankProvider {
     public boolean matchData(String cardNum, String phone);
     public void withdrawing(String cn, float amount);
     public void deposit(String cn, float amount);
+    public boolean isExist(String phone);
 }

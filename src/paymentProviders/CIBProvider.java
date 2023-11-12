@@ -2,6 +2,7 @@ package paymentProviders;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 
 public class CIBProvider implements BankProvider{
     private ArrayList<Map<String, String>> vector = new ArrayList<>();
@@ -41,6 +42,14 @@ public class CIBProvider implements BankProvider{
                 map.put("balance", Float.toString(balance));
             }
         }
+    }
+    public boolean isExist(String phone) {
+        for (Map<String, String> map : vector){
+            if(Objects.equals(map.get("phoneNum"), phone)){
+                return true;
+            }
+        }
+        return false;
     }
     public void seed(){
         vector.add(Map.of(

@@ -19,7 +19,7 @@ public class NationalBankOfEgyptProvider implements BankProvider{
     }
     public boolean matchData(String card, String phone){
         for (Map<String, String> map : vector){
-            if(Objects.equals(map.get("cardNum"), card) && map.get("phoneNum") == phone){
+            if(Objects.equals(map.get("cardNum"), card) && Objects.equals(map.get("phoneNum"), phone)){
                 return true;
             }
         }
@@ -43,6 +43,16 @@ public class NationalBankOfEgyptProvider implements BankProvider{
             }
         }
     }
+
+    public boolean isExist(String phone) {
+        for (Map<String, String> map : vector){
+            if(Objects.equals(map.get("phoneNum"), phone)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void seed(){
         vector.add(Map.of(
                 "cardNum", "123456789",

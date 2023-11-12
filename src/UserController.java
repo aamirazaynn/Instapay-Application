@@ -22,8 +22,11 @@ public class UserController {
 
     public void transferMoney(User fromUser, float amount, String toUser, String toProvider, ApplicationData applicationData){
         if(fromUser.getBalance() < amount){
-            return;
+            System.out.println("Your balance is not enough :(");
         } else{
+            String phoneNum = applicationData.getPhoneNumByUsername(fromUser.getUserInfo().getUsername());
+            String providerName = applicationData.getUserProvider(fromUser.getUserInfo().getUsername());
+            
             if(TransactionValidations.isValidCardNumber(toUser)){ // bank
                 transaction.transfer(amount, toUser, toProvider, applicationData);
             } else if (TransactionValidations.isValidPhoneNumber(toUser)) { // wallet

@@ -6,13 +6,17 @@ import java.util.Objects;
 
 public class BankTransaction implements Transaction{
 
-    public void transfer(float amount, String toUser, String toProvider, ApplicationData applicationData) {
+    public boolean transfer(float amount, String toUser, String toProvider, ApplicationData applicationData) {
         BankProvider b;
         if(Objects.equals(toProvider, "CIB")){
             b = new CIBProvider();
         } else{
             b = new NationalBankOfEgyptProvider();
         }
-        b.deposit(toUser, amount);
+        if(b.isExist(toProvider)){
+            b.deposit(toUser, amount);
+            return true;
+        }
+        return false;
     }
 }
