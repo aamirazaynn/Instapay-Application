@@ -1,9 +1,12 @@
 public class User {
-    UserInfo userInfo;
-    float balance ;
-    String phoneNumber;
-    Provider provider;
+    private UserInfo userInfo;
+    private float balance ;
+    private String phoneNumber;
+    private Provider provider;
 
+    public User() {
+
+    }
     public UserInfo getUserInfo() {
         return userInfo;
     }

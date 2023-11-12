@@ -1,3 +1,5 @@
+package paymentProviders;
+
 public interface BankProvider {
     public float getBalanceByCardNum(String cardNum);
     public boolean matchData(String cardNum, String phone);

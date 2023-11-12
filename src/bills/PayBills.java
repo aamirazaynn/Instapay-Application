@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.Map;
+package bills;
 
 public interface PayBills{
     public boolean pay(String code ,float balance );

@@ -1,7 +1,11 @@
 public class UserInfo {
-    String username;
-    String password;
+    private String username;
+    private String password;
 
+    public UserInfo(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
     public String getPassword() {
         return password;
     }

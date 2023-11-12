@@ -1,3 +1,5 @@
+package paymentProviders;
+
 public interface ElectronicPaymentProvider{
     public float getBalanceByPhoneNumber(String phone);
     public boolean matchPhoneNum(String phone);
