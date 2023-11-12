@@ -1,0 +1,3 @@
+public enum Provider {
+    NATIONALBANKOFEGYPT,CIB,VODAFONE,FAWRY
+}
