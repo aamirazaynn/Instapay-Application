@@ -3,7 +3,7 @@ import paymentProviders.WalletProvider;
 
 public class WalletSignUp extends SignUp {
 
-    public void register(LocalStorage localStorage, String providerName) {
+    public void register(ApplicationData applicationData, String providerName) {
         User user=new User();
         SignUpValidation s = new SignUpValidation();
         WalletProvider walletProvider = new VodafoneProvider();
@@ -12,7 +12,7 @@ public class WalletSignUp extends SignUp {
             user.setPhoneNumber(super.getPhoneNumber());
             user.setProvider(super.getProviderName());
             user.setUsertype("WALLET");
-            localStorage.addUser(user);
+            applicationData.addUser(user);
         } else {
             System.out.println("Fail");
         }

@@ -13,7 +13,7 @@ public class BankSignUp extends SignUp {
         this.cardNumber = cardNumber;
     }
 
-    public void register(LocalStorage localStorage, String providerName) {
+    public void register(ApplicationData applicationData, String providerName) {
         User user=new User();
         SignUpValidation s = new SignUpValidation();
         BankProvider p;
@@ -29,7 +29,7 @@ public class BankSignUp extends SignUp {
             user.setPhoneNumber(super.getPhoneNumber());
             user.setProvider(super.getProviderName());
             user.setUsertype("BANK");
-            localStorage.addUser(user);
+            applicationData.addUser(user);
         } else {
             System.out.println("Fail");
         }

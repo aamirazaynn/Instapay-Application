@@ -36,5 +36,5 @@ public abstract class SignUp {
         this.providerName = providerName;
     }
 
-    public abstract void register(LocalStorage localStorage, String providerName);
+    public abstract void register(ApplicationData applicationData, String providerName);
 }

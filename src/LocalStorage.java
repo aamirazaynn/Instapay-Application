@@ -26,4 +26,28 @@ public class LocalStorage implements ApplicationData {
         }
         return null;
     }
+    public String getPhoneNumByUsername(String username){
+        for (Map<String, String> userInfo : users) {
+            if (username.equals(userInfo.get("username"))) {
+                return userInfo.get("phoneNumber");
+            }
+        }
+        return null;
+    }
+    public String getUserProvider(String username){
+        for (Map<String, String> userInfo : users) {
+            if (username.equals(userInfo.get("username"))) {
+                return userInfo.get("type");
+            }
+        }
+        return null;
+    }
+    public String getUserType(String username){
+        for (Map<String, String> userInfo : users) {
+            if (username.equals(userInfo.get("username"))) {
+                return userInfo.get("type");
+            }
+        }
+        return null;
+    }
 }

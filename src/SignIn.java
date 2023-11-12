@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class SignIn {
 
     String userName;
@@ -19,21 +21,9 @@ public class SignIn {
         this.password = password;
     }
 
-    public boolean confirmSignIn(ApplicationData applicationData) {
-        if (true) {
-            String storedPassword = applicationData.getPassByUserName(userName);
-
-            if (storedPassword != null && storedPassword.equals(password)) {
-                System.out.println("Sign in successful");
-                return true;
-            } else {
-                System.out.println("Invalid username or password");
-                return false;
-            }
-        }
-        else {
-            System.out.println("Invalid username or password format");
-            return false;
+    public void confirmSignIn(ApplicationData applicationData) {
+        if(!Objects.equals(applicationData.getPassByUserName(userName), password)){
+            System.out.println("Fail to signin");
         }
     }
 }
