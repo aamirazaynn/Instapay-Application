@@ -1,43 +1,10 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package bills;
 
-public interface PayBills{
-    public boolean pay(String code ,float balance );
+public interface PayBills {
+    boolean pay(String var1, float var2);
 }
-class GasBill implements PayBills {
-    public boolean pay(String code, float balance) {
-        GasBillProvider g = new GasBillProvider();
-        if(g.getAmountByCode(code) > balance){
-            g.payBill(code);
-            return true;
-
-        } else{
-            return false;
-        }
-    }
-}
-class WaterBill implements PayBills {
-    public boolean pay(String code, float balance) {
-        WaterBillProvider w = new WaterBillProvider();
-        if(w.getAmountByCode(code) > balance){
-            w.payBill(code);
-            return true;
-
-        } else{
-            return false;
-        }
-    }
-}
-class ElectricityBill implements PayBills {
-    public boolean pay(String code, float balance) {
-        ElectricityBillProvider e = new ElectricityBillProvider();
-        if(e.getAmountByCode(code) > balance){
-            e.payBill(code);
-            return true;
-
-        } else{
-            return false;
-        }
-    }
-}
-
-

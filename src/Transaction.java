@@ -1,3 +1,8 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 public interface Transaction {
-    public boolean transfer(float amount, String toUser, String toProvider, ApplicationData applicationData);
+    boolean transfer(float var1, String var2, String var3, ApplicationData var4);
 }

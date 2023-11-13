@@ -1,9 +1,20 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package paymentProviders;
 
 public interface BankProvider {
-    public float getBalanceByCardNum(String cardNum);
-    public boolean matchData(String cardNum, String phone);
-    public void withdrawing(String cn, float amount);
-    public void deposit(String cn, float amount);
-    public boolean isExist(String phone);
+    float getBalanceByCardNum(String var1);
+
+    boolean matchData(String var1, String var2);
+
+    void withdrawing(String var1, float var2);
+
+    void deposit(String var1, float var2);
+
+    boolean isExist(String var1);
+
+    void printUsers();
 }

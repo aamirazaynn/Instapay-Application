@@ -1,20 +1,35 @@
-import paymentProviders.VodafoneProvider;
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 import paymentProviders.WalletProvider;
 
 public class WalletSignUp extends SignUp {
+    public WalletSignUp() {
+    }
 
-    public void register(ApplicationData applicationData, String providerName) {
-        User user=new User();
+    public void register(ApplicationData applicationData, WalletProvider walletProvider) {
+        User user = new User();
         SignUpValidation s = new SignUpValidation();
-        WalletProvider walletProvider = new VodafoneProvider();
-        if (!s.checkExistUserName(super.getUserName()) && s.checkStrongPassword(super.getPassword()) && walletProvider.matchPhoneNum(super.getPhoneNumber())) {
-            user.setUserInfo(new UserInfo(super.getUserName(), super.getPassword()));
-            user.setPhoneNumber(super.getPhoneNumber());
-            user.setProvider(super.getProviderName());
-            user.setUsertype("WALLET");
-            applicationData.addUser(user);
+        if (!s.checkExistUserName(super.getUserName(), applicationData)) {
+            if (s.checkStrongPassword(super.getPassword())) {
+                if (walletProvider.matchPhoneNum(super.getPhoneNumber())) {
+                    user.setUsername(super.getUserName());
+                    user.setPassword(super.getPassword());
+                    user.setPhoneNumber(super.getPhoneNumber());
+                    user.setProvider(super.getProviderName());
+                    user.setUsertype("WALLET");
+                    applicationData.addUser(user);
+                } else {
+                    System.out.println("Phone number is not exist");
+                }
+            } else {
+                System.out.println("Password is not strong");
+            }
         } else {
-            System.out.println("Fail");
+            System.out.println("user Exist");
         }
+
     }
 }

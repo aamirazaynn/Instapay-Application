@@ -1,29 +1,30 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 public class User {
-    private UserInfo userInfo;
-    private float balance ;
+    private String username;
+    private String password;
+    private float balance;
     private String phoneNumber;
     private Provider provider;
     private Usertype usertype;
 
-    public User(UserInfo userInfo, float balance, String phoneNumber, Provider provider) {
-        this.userInfo = userInfo;
+    public User(String username, String password, float balance, String phoneNumber, String provider, String usertype) {
+        this.username = username;
+        this.password = password;
         this.balance = balance;
         this.phoneNumber = phoneNumber;
-        this.provider = provider;
+        this.setProvider(provider);
+        this.setUsertype(usertype);
     }
+
     public User() {
-
-    }
-    public UserInfo getUserInfo() {
-        return userInfo;
-    }
-
-    public void setUserInfo(UserInfo userInfo) {
-        this.userInfo = userInfo;
     }
 
     public float getBalance() {
-        return balance;
+        return this.balance;
     }
 
     public void setBalance(float balance) {
@@ -31,7 +32,23 @@ public class User {
     }
 
     public String getPhoneNumber() {
-        return phoneNumber;
+        return this.phoneNumber;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setPhoneNumber(String phoneNumber) {
@@ -39,11 +56,11 @@ public class User {
     }
 
     public Provider getProvider() {
-        return provider;
+        return this.provider;
     }
 
     public Usertype getUsertype() {
-        return usertype;
+        return this.usertype;
     }
 
     public void setUsertype(String usertype) {
@@ -52,6 +69,7 @@ public class User {
         } else if (usertype.equalsIgnoreCase("BANK")) {
             this.usertype = Usertype.BANK;
         }
+
     }
 
     public void setProvider(String provider) {
@@ -64,5 +82,6 @@ public class User {
         } else if (provider.equalsIgnoreCase("FAWRY")) {
             this.provider = Provider.FAWRY;
         }
+
     }
 }
