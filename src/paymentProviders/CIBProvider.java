@@ -52,10 +52,11 @@ public class CIBProvider implements BankProvider {
 
         while(var3.hasNext()) {
             Map<String, String> map = (Map)var3.next();
-            if (Objects.equals(map.get("cardNum"), cn)) {
+            if (Objects.equals(map.get("phoneNum"), cn)) {
                 float balance = Float.parseFloat((String)map.get("balance"));
                 balance -= amount;
-                map.put("balance", Float.toString(balance));
+                String newBalance = String.valueOf(balance);
+                map.put("balance", newBalance);
             }
         }
 
@@ -66,10 +67,11 @@ public class CIBProvider implements BankProvider {
 
         while(var3.hasNext()) {
             Map<String, String> map = (Map)var3.next();
-            if (Objects.equals(map.get("cardNum"), cn)) {
-                float balance = Float.parseFloat((String)map.get("balance"));
+            if (Objects.equals(map.get("phoneNum"), cn)) {
+                float balance = Float.parseFloat(map.get("balance"));
                 balance += amount;
-                map.put("balance", Float.toString(balance));
+                String newBalance = String.valueOf(balance);
+                map.put("balance", newBalance);
             }
         }
 
@@ -101,7 +103,7 @@ public class CIBProvider implements BankProvider {
     }
 
     public void seed() {
-        this.vector.add(Map.of("cardNum", "123456789", "phoneNum", "01149535899", "balance", "0"));
+        this.vector.add(Map.of("cardNum", "123456789", "phoneNum", "01149535899", "balance", "200"));
         this.vector.add(Map.of("cardNum", "234567891", "phoneNum", "01140045708", "balance", "5"));
         this.vector.add(Map.of("cardNum", "345678912", "phoneNum", "01150888345", "balance", "10"));
         this.vector.add(Map.of("cardNum", "456789123", "phoneNum", "01117518970", "balance", "500"));

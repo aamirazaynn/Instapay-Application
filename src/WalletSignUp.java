@@ -19,6 +19,7 @@ public class WalletSignUp extends SignUp {
                     user.setPassword(super.getPassword());
                     user.setPhoneNumber(super.getPhoneNumber());
                     user.setProvider(super.getProviderName());
+                    user.setBalance(walletProvider.getBalanceByPhoneNumber(super.getPhoneNumber()));
                     user.setUsertype("WALLET");
                     applicationData.addUser(user);
                 } else {

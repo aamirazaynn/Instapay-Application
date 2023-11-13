@@ -20,7 +20,7 @@ public class BankTransaction implements Transaction {
             b = new NationalBankOfEgyptProvider();
         }
 
-        if (((BankProvider)b).isExist(toProvider)) {
+        if (((BankProvider)b).isExist(toUser)) {
             ((BankProvider)b).deposit(toUser, amount);
             return true;
         } else {

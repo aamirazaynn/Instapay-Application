@@ -29,6 +29,7 @@ public class BankSignUp extends SignUp {
                     user.setPassword(super.getPassword());
                     user.setPhoneNumber(super.getPhoneNumber());
                     user.setProvider(super.getProviderName());
+                    user.setBalance(bankProvider.getBalanceByCardNum(cardNumber));
                     user.setUsertype("BANK");
                     applicationData.addUser(user);
                 } else {

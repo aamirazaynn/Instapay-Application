@@ -12,18 +12,20 @@ public class Main {
         BankProvider cibProvider = new CIBProvider();
         BankProvider nationalBankOfEgyptProvider = new NationalBankOfEgyptProvider();
         WalletProvider walletProvider = new VodafoneProvider();
+        Transaction transaction;
 
         while (true) {
             System.out.print("1. SignUp, 2. SignIn, 3.Exit: ");
             Scanner scanner = new Scanner(System.in);
             char choice = scanner.next().charAt(0);
             switch (choice) {
-                // --------------------------------------sign in -----------------------------------------------
+                // --------------------------------------sign up -----------------------------------------------
                 case '1': {
                     SignUp signUp;
                     System.out.print("1. Bank, 2. Wallet: ");
                     char userType = scanner.next().charAt(0);
                     switch (userType) {
+                        // ------------------------ Bank --------------------------------
                         case '1':
                         {
                             signUp = new BankSignUp();
@@ -50,6 +52,7 @@ public class Main {
                             }
                         };
                         break;
+                        // ------------------------ Wallet --------------------------------
                         case '2':
                         {
                             signUp = new WalletSignUp();
@@ -69,7 +72,7 @@ public class Main {
                     }
                 }
                     break;
-                // --------------------------------------sign up -----------------------------------------------
+                // --------------------------------------sign in -----------------------------------------------
                 case '2':
                 {
                     SignIn signIn = new SignIn();
@@ -100,6 +103,8 @@ public class Main {
                                 switch (transferType) {
                                     // ------------------------ to wallet --------------------------------------------
                                     case '1':{
+                                        transaction = new WalletTransaction();
+                                        userController.setTransaction(transaction);
                                         System.out.print("Enter the amount you want to transfer: ");
                                         amount = scanner.nextFloat();
                                         System.out.print("Enter the phone number you want to transfer to: ");
@@ -112,6 +117,8 @@ public class Main {
                                     break;
                                     // -------------------------- to instapay ---------------------------------------
                                     case '2': {
+                                        transaction = new InstapayTransaction();
+                                        userController.setTransaction(transaction);
                                         System.out.print("Enter the amount you want to transfer: ");
                                         amount = scanner.nextFloat();
                                         System.out.print("Enter the username you want to transfer to: ");
@@ -119,9 +126,10 @@ public class Main {
                                         userController.transferMoney(loggedInUser, amount, toUser, "INSTAPAY", applicationData);
                                     }
                                     break;
-
+                                    // ---------------------------- to bank ---------------------------------------
                                     case '3': {
-                                        // ----------------------- to bank ---------------------------------------------
+                                        transaction = new BankTransaction();
+                                        userController.setTransaction(transaction);
                                         System.out.print("Enter the amount you want to transfer: ");
                                         amount = scanner.nextFloat();
                                         System.out.print("Enter the phone number you want to transfer to: ");

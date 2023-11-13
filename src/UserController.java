@@ -43,6 +43,7 @@ public class UserController {
             String providerName = fromUser.getProvider().toString();
             if (Objects.equals(fromUser.getUsertype().toString(), "BANK")) {
                 this.transaction.transfer(amount, toUser, toProvider, applicationData);
+                fromUser.setBalance(fromUser.getBalance() - amount);
                 Object b;
                 if (Objects.equals(providerName, "NATIONALBANKOFEGYPT")) {
                     b = new NationalBankOfEgyptProvider();
@@ -53,6 +54,7 @@ public class UserController {
                 ((BankProvider)b).withdrawing(phoneNum, amount);
             } else if (Objects.equals(fromUser.getUsertype().toString(), "WALLET")) {
                 this.transaction.transfer(amount, toUser, toProvider, applicationData);
+                fromUser.setBalance(fromUser.getBalance() - amount);
                 WalletProvider w = new VodafoneProvider();
                 w.withdrawing(phoneNum, amount);
             }

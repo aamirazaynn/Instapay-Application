@@ -55,7 +55,7 @@ public class VodafoneProvider implements WalletProvider {
             if (Objects.equals(map.get("phoneNum"), cn)) {
                 float balance = Float.parseFloat((String)map.get("balance"));
                 balance -= amount;
-                map.put("balance", Float.toString(balance));
+                map.put("balance", String.valueOf(balance));
             }
         }
 
@@ -69,7 +69,7 @@ public class VodafoneProvider implements WalletProvider {
             if (Objects.equals(map.get("phoneNum"), cn)) {
                 float balance = Float.parseFloat((String)map.get("balance"));
                 balance += amount;
-                map.put("balance", Float.toString(balance));
+                map.put("balance", String.valueOf(balance));
             }
         }
 

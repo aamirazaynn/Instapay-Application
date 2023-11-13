@@ -20,6 +20,7 @@ public class LocalStorage implements ApplicationData {
         userInfo.put("password", user.getPassword());
         userInfo.put("provider", user.getProvider().toString());
         userInfo.put("phoneNumber", user.getPhoneNumber());
+        userInfo.put("balance", Float.toString(user.getBalance()));
         userInfo.put("type", user.getUsertype().toString());
         this.users.add(userInfo);
     }
@@ -36,7 +37,7 @@ public class LocalStorage implements ApplicationData {
             map = (Map)var2.next();
         } while(!username.equals(map.get("username")));
 
-        return new User((String)map.get("username"), (String)map.get("password"), 0.0F, (String)map.get("phoneNumber"), (String)map.get("provider"), (String)map.get("type"));
+        return new User((String)map.get("username"), (String)map.get("password"), Float.parseFloat((String)map.get("balance")), (String)map.get("phoneNumber"), (String)map.get("provider"), (String)map.get("type"));
     }
 
     public String getPassByUserName(String userName) {
@@ -114,6 +115,13 @@ public class LocalStorage implements ApplicationData {
         return true;
     }
 
+    public void updateBalance(String username, float balance) {
+        for (Map<String, String> userInfo : this.users) {
+            if (username.equals(userInfo.get("username"))) {
+                userInfo.put("balance", Float.toString(balance));
+            }
+        }
+    }
     public void printUsers() {
         Iterator var1 = this.users.iterator();
 
