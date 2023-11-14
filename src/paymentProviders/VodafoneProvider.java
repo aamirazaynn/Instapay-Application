@@ -73,21 +73,6 @@ public class VodafoneProvider implements WalletProvider {
         }
     }
 
-    public boolean isExist(String phone) {
-        Iterator var2 = this.vector.iterator();
-
-        Map map;
-        do {
-            if (!var2.hasNext()) {
-                return false;
-            }
-
-            map = (Map)var2.next();
-        } while(!Objects.equals(map.get("phoneNum"), phone));
-
-        return true;
-    }
-
     public void printUsers() {
         Iterator var1 = this.vector.iterator();
 
