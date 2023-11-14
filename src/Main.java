@@ -1,5 +1,7 @@
 import java.util.Objects;
 import java.util.Scanner;
+
+import bills.*;
 import paymentProviders.*;
 import paymentProviders.BankProvider;
 import paymentProviders.CIBProvider;
@@ -15,6 +17,11 @@ public class Main {
         BankProvider nationalBankOfEgyptProvider = new NationalBankOfEgyptProvider();
         WalletProvider walletProvider = new VodafoneProvider();
         Transaction transaction;
+        PayBills payBills = new PayBills();
+        BillProviderInterface waterProvider = new WaterBillProvider();
+        BillProviderInterface electricityProvider = new ElectricityBillProvider();
+        BillProviderInterface gasProvider = new GasBillProvider();
+
 
         while (true) {
             System.out.print("1. SignUp, 2. SignIn, 3.Exit: ");
@@ -83,6 +90,8 @@ public class Main {
                     System.out.print("Enter your password: ");
                     String password = scanner.next();
                     signIn.setPassword(password);
+                    UserController userController = new UserController();
+                    ProviderInterface fromProvider;
                     if(signIn.confirmSignIn(applicationData)){
                         System.out.println("Logged in successfully");
                     }
@@ -92,8 +101,7 @@ public class Main {
                             User loggedInUser = applicationData.getUser(userName);
                             System.out.print("1. Transfer, 2. PayBills, 3. Logout: ");
                             char operation = scanner.next().charAt(0);
-                            UserController userController = new UserController();
-                            ProviderInterface fromProvider;
+
                             if(Objects.equals(loggedInUser.getProvider().toString(), "VODAFONE")){
                                 fromProvider = walletProvider;
                             } else if(Objects.equals(loggedInUser.getProvider().toString(), "CIB")){
@@ -169,7 +177,27 @@ public class Main {
                                 break;
                                 // ------------------------------------pay bills----------------------------------------
                                 case '2': {
+                                    System.out.print("1. pay water bill, 2. pay electricity bill, 3. pay gas bill: ");
+                                    char billType = scanner.next().charAt(0);
+                                    System.out.print("Enter bill code: ");
+                                    String billCode = scanner.next();
+                                    switch (billType) {
+                                        case '1': {
+                                            userController.setPayBills(payBills);
+                                            userController.payBills(loggedInUser, billCode, waterProvider, fromProvider);
 
+                                        }
+                                        break;
+                                        case '2': {
+                                            userController.setPayBills(payBills);
+                                            userController.payBills(loggedInUser, billCode, electricityProvider, fromProvider);
+                                        }
+                                        break;
+                                        case '3': {
+                                            userController.setPayBills(payBills);
+                                            userController.payBills(loggedInUser, billCode, gasProvider, fromProvider);
+                                        }
+                                    }
                                 }
                                 break;
                                 // -----------------------------------logout-------------------------------------------

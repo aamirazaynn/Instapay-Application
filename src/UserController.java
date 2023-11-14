@@ -1,3 +1,4 @@
+import bills.BillProviderInterface;
 import bills.PayBills;
 import java.util.Objects;
 
@@ -46,6 +47,15 @@ public class UserController {
                 b.withdrawing(phoneNum, amount);
             }
         }
+    }
 
+    public void payBills(User user, String code, BillProviderInterface billProviderInterface, ProviderInterface providerInterface) {
+        float amount = payBills.getAmountByCode(code, billProviderInterface);
+        if(amount < user.getBalance()){
+            payBills.pay(code, billProviderInterface);
+            providerInterface.withdrawing(user.getPhoneNumber(), amount);
+        } else {
+            System.out.println("Your balance is not enough :(");
+        }
     }
 }

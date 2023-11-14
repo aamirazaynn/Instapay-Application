@@ -1,10 +1,10 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 package bills;
 
-public interface PayBills {
-    boolean pay(String var1, float var2);
+public class PayBills {
+    public void pay(String code, BillProviderInterface billProviderInterface){
+        billProviderInterface.payBill(code);
+    }
+    public float getAmountByCode(String code, BillProviderInterface billProviderInterface){
+        return billProviderInterface.getAmountByCode(code);
+    }
 }

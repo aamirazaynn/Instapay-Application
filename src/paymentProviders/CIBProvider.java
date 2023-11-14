@@ -97,7 +97,7 @@ public class CIBProvider implements BankProvider {
     }
 
     public void seed() {
-        this.vector.add(createUserMap("123456789", "01149535899", "200"));
+        this.vector.add(createUserMap("123456789", "01149535899", "5000"));
         this.vector.add(createUserMap("234567891", "01140045708", "5"));
         this.vector.add(createUserMap("345678912", "01150888345", "10"));
         this.vector.add(createUserMap("456789123", "01117518970", "500"));
