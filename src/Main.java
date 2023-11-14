@@ -1,6 +1,5 @@
 import java.util.Objects;
 import java.util.Scanner;
-
 import paymentProviders.*;
 import paymentProviders.BankProvider;
 import paymentProviders.CIBProvider;
@@ -96,11 +95,11 @@ public class Main {
                             UserController userController = new UserController();
                             ProviderInterface fromProvider;
                             if(Objects.equals(loggedInUser.getProvider().toString(), "VODAFONE")){
-                                fromProvider = new VodafoneProvider();
+                                fromProvider = walletProvider;
                             } else if(Objects.equals(loggedInUser.getProvider().toString(), "CIB")){
-                                fromProvider = new CIBProvider();
+                                fromProvider = cibProvider;
                             } else{
-                                fromProvider = new NationalBankOfEgyptProvider();
+                                fromProvider = nationalBankOfEgyptProvider;
                             }
                             //----------------------------------------operations----------------------------------------
                             switch (operation) {
@@ -115,7 +114,7 @@ public class Main {
                                     float amount;
                                     String toUser;
                                     switch (transferType) {
-                                        // ------------------------ to wallet --------------------------------------------
+                                        // ------------------------ to wallet ------------------------------------------
                                         case '1':{
                                             transaction = new WalletTransaction();
                                             userController.setTransaction(transaction);
@@ -126,18 +125,24 @@ public class Main {
                                             userController.transferMoney(loggedInUser, amount, toUser, walletProvider, applicationData, fromProvider);
                                         }
                                         break;
-                                        // -------------------------- to instapay ---------------------------------------
+                                        // -------------------------- to instapay --------------------------------------
                                         case '2': {
-//                                            transaction = new InstapayTransaction();
-//                                            userController.setTransaction(transaction);
+                                            transaction = new InstapayTransaction();
+                                            userController.setTransaction(transaction);
                                             System.out.print("Enter the amount you want to transfer: ");
                                             amount = scanner.nextFloat();
                                             System.out.print("Enter the username you want to transfer to: ");
                                             toUser = scanner.next();
-//                                            userController.transferMoney(loggedInUser, amount, toUser, , applicationData, fromProvider);
+                                            if(Objects.equals(applicationData.getUserProvider(toUser), "CIB")){
+                                                userController.transferMoney(loggedInUser, amount, toUser, cibProvider, applicationData, fromProvider);
+                                            } else if(Objects.equals(applicationData.getUserProvider(toUser), "NATIONALBANKOFEGYPT")){
+                                                userController.transferMoney(loggedInUser, amount, toUser, nationalBankOfEgyptProvider, applicationData, fromProvider);
+                                            } else {
+                                                userController.transferMoney(loggedInUser, amount, toUser, walletProvider, applicationData, fromProvider);
+                                            }
                                         }
                                         break;
-                                        // ---------------------------- to bank ---------------------------------------
+                                        // ---------------------------- to bank ----------------------------------------
                                         case '3': {
                                             transaction = new BankTransaction();
                                             userController.setTransaction(transaction);

@@ -82,7 +82,7 @@ public class LocalStorage implements ApplicationData {
             userInfo = (Map)var2.next();
         } while(!username.equals(userInfo.get("username")));
 
-        return (String)userInfo.get("type");
+        return (String)userInfo.get("provider");
     }
 
     public String getUserType(String username) {
@@ -122,6 +122,7 @@ public class LocalStorage implements ApplicationData {
             }
         }
     }
+
     public void printUsers() {
         Iterator var1 = this.users.iterator();
 

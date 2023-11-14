@@ -32,7 +32,6 @@ public class UserController {
     }
 
     public void transferMoney(User fromUser, float amount, String toUser, ProviderInterface toProvider, ApplicationData applicationData, ProviderInterface b) {
-        System.out.println(fromUser.getBalance());
         if (fromUser.getBalance() < amount) {
             System.out.println("Your balance is not enough :(");
         } else {

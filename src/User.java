@@ -79,8 +79,6 @@ public class User {
             this.provider = Provider.CIB;
         } else if (provider.equalsIgnoreCase("VODAFONE")) {
             this.provider = Provider.VODAFONE;
-        } else if (provider.equalsIgnoreCase("FAWRY")) {
-            this.provider = Provider.FAWRY;
         }
 
     }

@@ -6,9 +6,7 @@
 public enum Provider {
     NATIONALBANKOFEGYPT,
     CIB,
-    VODAFONE,
-    FAWRY;
+    VODAFONE;
 
-    private Provider() {
-    }
+    private Provider() {}
 }
