@@ -3,6 +3,7 @@
 // (powered by FernFlower decompiler)
 //
 
+import paymentProviders.ProviderInterface;
 import paymentProviders.VodafoneProvider;
 import paymentProviders.WalletProvider;
 
@@ -10,10 +11,9 @@ public class WalletTransaction implements Transaction {
     public WalletTransaction() {
     }
 
-    public boolean transfer(float amount, String toUser, String toProvider, ApplicationData applicationData) {
-        WalletProvider w = new VodafoneProvider();
-        if (w.matchPhoneNum(toUser)) {
-            w.deposit(toUser, amount);
+    public boolean transfer(float amount, String toUser, ProviderInterface toProvider, ApplicationData applicationData) {
+        if (((WalletProvider)toProvider).matchPhoneNum(toUser)) {
+            toProvider.deposit(toUser, amount);
             return true;
         } else {
             return false;

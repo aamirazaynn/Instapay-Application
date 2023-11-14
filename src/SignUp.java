@@ -3,6 +3,9 @@
 // (powered by FernFlower decompiler)
 //
 
+import paymentProviders.BankProvider;
+import paymentProviders.ProviderInterface;
+
 public abstract class SignUp {
     private String userName;
     private String password;
@@ -43,4 +46,5 @@ public abstract class SignUp {
     public void setProviderName(String providerName) {
         this.providerName = providerName;
     }
+    public abstract void register(ApplicationData applicationData, ProviderInterface providerInterface);
 }

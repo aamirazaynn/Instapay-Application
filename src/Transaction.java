@@ -3,6 +3,8 @@
 // (powered by FernFlower decompiler)
 //
 
+import paymentProviders.ProviderInterface;
+
 public interface Transaction {
-    boolean transfer(float var1, String var2, String var3, ApplicationData var4);
+    boolean transfer(float var1, String var2, ProviderInterface var3, ApplicationData var4);
 }

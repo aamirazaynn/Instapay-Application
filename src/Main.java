@@ -1,4 +1,7 @@
+import java.util.Objects;
 import java.util.Scanner;
+
+import paymentProviders.*;
 import paymentProviders.BankProvider;
 import paymentProviders.CIBProvider;
 import paymentProviders.NationalBankOfEgyptProvider;
@@ -45,10 +48,10 @@ public class Main {
                             char providerChoice = scanner.next().charAt(0);
                             if (providerChoice == '1') {
                                 signUp.setProviderName("CIB");
-                                ((BankSignUp) signUp).register(applicationData, cibProvider);
+                                signUp.register(applicationData, cibProvider);
                             } else {
                                 signUp.setProviderName("NATIONALBANKOFEGYPT");
-                                ((BankSignUp) signUp).register(applicationData, nationalBankOfEgyptProvider);
+                                signUp.register(applicationData, nationalBankOfEgyptProvider);
                             }
                         };
                         break;
@@ -66,7 +69,7 @@ public class Main {
                             String password = scanner.next();
                             signUp.setPassword(password);
                             signUp.setProviderName("VODAFONE");
-                            ((WalletSignUp) signUp).register(applicationData, walletProvider);
+                            signUp.register(applicationData, walletProvider);
                         };
                         break;
                     }
@@ -91,6 +94,14 @@ public class Main {
                             System.out.print("1. Transfer, 2. PayBills, 3. Logout: ");
                             char operation = scanner.next().charAt(0);
                             UserController userController = new UserController();
+                            ProviderInterface fromProvider;
+                            if(Objects.equals(loggedInUser.getProvider().toString(), "VODAFONE")){
+                                fromProvider = new VodafoneProvider();
+                            } else if(Objects.equals(loggedInUser.getProvider().toString(), "CIB")){
+                                fromProvider = new CIBProvider();
+                            } else{
+                                fromProvider = new NationalBankOfEgyptProvider();
+                            }
                             //----------------------------------------operations----------------------------------------
                             switch (operation) {
                                 // -----------------------------------transfer money------------------------------------
@@ -112,21 +123,18 @@ public class Main {
                                             amount = scanner.nextFloat();
                                             System.out.print("Enter the phone number you want to transfer to: ");
                                             toUser = scanner.next();
-                                            walletProvider.printUsers();
-                                            System.out.println("------------------------------------------");
-                                            userController.transferMoney(loggedInUser, amount, toUser, "VODAFONE", applicationData);
-                                            walletProvider.printUsers();
+                                            userController.transferMoney(loggedInUser, amount, toUser, walletProvider, applicationData, fromProvider);
                                         }
                                         break;
                                         // -------------------------- to instapay ---------------------------------------
                                         case '2': {
-                                            transaction = new InstapayTransaction();
-                                            userController.setTransaction(transaction);
+//                                            transaction = new InstapayTransaction();
+//                                            userController.setTransaction(transaction);
                                             System.out.print("Enter the amount you want to transfer: ");
                                             amount = scanner.nextFloat();
                                             System.out.print("Enter the username you want to transfer to: ");
                                             toUser = scanner.next();
-                                            userController.transferMoney(loggedInUser, amount, toUser, "INSTAPAY", applicationData);
+//                                            userController.transferMoney(loggedInUser, amount, toUser, , applicationData, fromProvider);
                                         }
                                         break;
                                         // ---------------------------- to bank ---------------------------------------
@@ -141,17 +149,11 @@ public class Main {
                                             char bankChoice = scanner.next().charAt(0);
                                             switch (bankChoice) {
                                                 case '1': {
-                                                    cibProvider.printUsers();
-                                                    System.out.println("------------------------------------------");
-                                                    userController.transferMoney(loggedInUser, amount, toUser, "CIB", applicationData);
-                                                    cibProvider.printUsers();
+                                                    userController.transferMoney(loggedInUser, amount, toUser, cibProvider, applicationData, fromProvider);
                                                 }
                                                 break;
                                                 case '2': {
-                                                    nationalBankOfEgyptProvider.printUsers();
-                                                    System.out.println("------------------------------------------");
-                                                    userController.transferMoney(loggedInUser, amount, toUser, "NATIONALBANKOFEGYPT", applicationData);
-                                                    nationalBankOfEgyptProvider.printUsers();
+                                                    userController.transferMoney(loggedInUser, amount, toUser, nationalBankOfEgyptProvider, applicationData, fromProvider);
                                                 }
                                                 break;
                                             }

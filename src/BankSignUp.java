@@ -1,15 +1,10 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-
 import paymentProviders.BankProvider;
+import paymentProviders.ProviderInterface;
 
 public class BankSignUp extends SignUp {
     private String cardNumber;
 
-    public BankSignUp() {
-    }
+    public BankSignUp() {}
 
     public String getCardNumber() {
         return this.cardNumber;
@@ -19,17 +14,17 @@ public class BankSignUp extends SignUp {
         this.cardNumber = cardNumber;
     }
 
-    public void register(ApplicationData applicationData, BankProvider bankProvider) {
+    public void register(ApplicationData applicationData, ProviderInterface bankProvider) {
         User user = new User();
         SignUpValidation s = new SignUpValidation();
         if (!s.checkExistUserName(super.getUserName(), applicationData)) {
             if (s.checkStrongPassword(super.getPassword())) {
-                if (bankProvider.matchData(this.cardNumber, super.getPhoneNumber())) {
+                if (((BankProvider)bankProvider).matchData(this.cardNumber, super.getPhoneNumber())) {
                     user.setUsername(super.getUserName());
                     user.setPassword(super.getPassword());
                     user.setPhoneNumber(super.getPhoneNumber());
                     user.setProvider(super.getProviderName());
-                    user.setBalance(bankProvider.getBalanceByCardNum(cardNumber));
+                    user.setBalance(((BankProvider)bankProvider).getBalanceByCardNum(cardNumber));
                     user.setUsertype("BANK");
                     applicationData.addUser(user);
                 } else {

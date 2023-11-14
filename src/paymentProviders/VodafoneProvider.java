@@ -5,10 +5,7 @@
 
 package paymentProviders;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class VodafoneProvider implements WalletProvider {
     private ArrayList<Map<String, String>> vector = new ArrayList();
@@ -48,31 +45,47 @@ public class VodafoneProvider implements WalletProvider {
     }
 
     public void withdrawing(String cn, float amount) {
-        Iterator var3 = this.vector.iterator();
+        Iterator<Map<String, String>> iterator = this.vector.iterator();
 
-        while(var3.hasNext()) {
-            Map<String, String> map = (Map)var3.next();
+        while (iterator.hasNext()) {
+            Map<String, String> map = iterator.next();
             if (Objects.equals(map.get("phoneNum"), cn)) {
-                float balance = Float.parseFloat((String)map.get("balance"));
+                float balance = Float.parseFloat(map.get("balance"));
                 balance -= amount;
-                map.put("balance", String.valueOf(balance));
+                String newBalance = String.valueOf(balance);
+                map.put("balance", newBalance);
+
             }
         }
-
     }
 
     public void deposit(String cn, float amount) {
-        Iterator var3 = this.vector.iterator();
+        Iterator<Map<String, String>> iterator = this.vector.iterator();
 
-        while(var3.hasNext()) {
-            Map<String, String> map = (Map)var3.next();
+        while (iterator.hasNext()) {
+            Map<String, String> map = iterator.next();
             if (Objects.equals(map.get("phoneNum"), cn)) {
-                float balance = Float.parseFloat((String)map.get("balance"));
+                float balance = Float.parseFloat(map.get("balance"));
                 balance += amount;
-                map.put("balance", String.valueOf(balance));
+                String newBalance = String.valueOf(balance);
+                map.put("balance", newBalance);
             }
         }
+    }
 
+    public boolean isExist(String phone) {
+        Iterator var2 = this.vector.iterator();
+
+        Map map;
+        do {
+            if (!var2.hasNext()) {
+                return false;
+            }
+
+            map = (Map)var2.next();
+        } while(!Objects.equals(map.get("phoneNum"), phone));
+
+        return true;
     }
 
     public void printUsers() {
@@ -86,9 +99,17 @@ public class VodafoneProvider implements WalletProvider {
     }
 
     public void seed() {
-        this.vector.add(Map.of("phoneNum", "01149535899", "balance", "200"));
-        this.vector.add(Map.of("phoneNum", "01140045708", "balance", "5"));
-        this.vector.add(Map.of("phoneNum", "01150888345", "balance", "10"));
-        this.vector.add(Map.of("phoneNum", "01117518970", "balance", "500"));
+        this.vector.add(createUserMap("123456789", "01149535899", "200"));
+        this.vector.add(createUserMap("234567891", "01140045708", "5"));
+        this.vector.add(createUserMap("345678912", "01150888345", "10"));
+        this.vector.add(createUserMap("456789123", "01117518970", "500"));
+    }
+
+    public Map<String, String> createUserMap(String cardNum, String phoneNum, String balance) {
+        Map<String, String> userMap = new HashMap<>();
+        userMap.put("cardNum", cardNum);
+        userMap.put("phoneNum", phoneNum);
+        userMap.put("balance", balance);
+        return userMap;
     }
 }
