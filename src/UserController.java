@@ -46,6 +46,7 @@ public class UserController {
                 fromUser.setBalance(fromUser.getBalance() - amount);
                 b.withdrawing(phoneNum, amount);
             }
+            System.out.println("You have successfully transferred " + amount + " EGP to " + toUser);
         }
     }
 
@@ -54,6 +55,7 @@ public class UserController {
         if(amount < user.getBalance()){
             payBills.pay(code, billProviderInterface);
             providerInterface.withdrawing(user.getPhoneNumber(), amount);
+            System.out.println("You have successfully paid your bill");
         } else {
             System.out.println("Your balance is not enough :(");
         }
